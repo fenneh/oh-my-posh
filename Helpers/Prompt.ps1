@@ -37,7 +37,8 @@ function Get-ComputerName {
     if (Test-PsCore -and $PSVersionTable.Platform -ne 'Windows') {
         return $env:NAME
     }
-    return $env:COMPUTERNAME
+    $hostName = (Get-WmiObject Win32_ComputerSystem).DNSHostName
+    return $hostName
 }
 
 function Get-Provider {
